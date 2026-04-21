@@ -1,3 +1,27 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "use client"
 
 import { Badge } from "@/components/ui/badge"
@@ -19,6 +43,10 @@ import {
   ArrowUpRight,
   Sun,
   Moon,
+  Award,
+  Camera,
+  Palette,
+  Play,
 } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import { useTheme } from "next-themes"
@@ -39,7 +67,7 @@ export default function PortfolioLinda() {
     setIsVisible(true)
 
     const handleScroll = () => {
-      const sections = ["hero", "about", "experience", "projects", "education", "skills", "contact"]
+      const sections = ["hero", "about", "experience", "projects", "portfolio", "certifications", "education", "skills", "contact"]
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -101,7 +129,7 @@ export default function PortfolioLinda() {
       {showEmailModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 dark:bg-black/60 backdrop-blur-sm">
           <div className="bg-card border border-border rounded-2xl shadow-2xl p-8 w-[90vw] max-w-md animate-fade-in-up">
-            <h2 className="text-xl font-semibold mb-6 text-accent text-center font-serif">Choose your email service</h2>
+            <h2 className="text-xl font-semibold mb-6 text-accent text-center font-serif">Choisir votre service email</h2>
             <div className="flex flex-col gap-3">
               <button
                 className="flex items-center gap-3 px-5 py-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-300 font-medium hover:scale-[1.02] hover:border-blue-400/40 transition-all"
@@ -125,14 +153,14 @@ export default function PortfolioLinda() {
                 className="flex items-center gap-3 px-5 py-3 rounded-xl bg-muted border border-border text-muted-foreground font-medium hover:scale-[1.02] transition-all"
                 onClick={() => { window.open('mailto:lindamabrouk6@gmail.com?subject=Contact%20from%20portfolio', '_blank'); setShowEmailModal(false); }}
               >
-                <Mail className="w-5 h-5" /> Other (Default App)
+                <Mail className="w-5 h-5" /> Autre (App par défaut)
               </button>
             </div>
             <button
               className="mt-6 w-full py-3 rounded-xl border border-border text-muted-foreground font-medium hover:bg-muted transition-colors"
               onClick={() => setShowEmailModal(false)}
             >
-              Cancel
+              Annuler
             </button>
           </div>
         </div>
@@ -152,11 +180,12 @@ export default function PortfolioLinda() {
               {/* Desktop Nav */}
               <div className="hidden md:flex items-center space-x-8">
                 {[
-                  { id: "hero", label: "Home" },
-                  { id: "about", label: "About" },
-                  { id: "experience", label: "Experience" },
-                  { id: "projects", label: "Projects" },
-                  { id: "skills", label: "Skills" },
+                  { id: "hero", label: "Accueil" },
+                  { id: "about", label: "À propos" },
+                  { id: "experience", label: "Expérience" },
+                  { id: "projects", label: "Projets" },
+                  { id: "portfolio", label: "Portfolio" },
+                  { id: "skills", label: "Compétences" },
                 ].map((item) => (
                   <button
                     key={item.id}
@@ -194,7 +223,7 @@ export default function PortfolioLinda() {
                   className="hidden md:inline-flex items-center px-5 py-2 rounded-full accent-gradient text-sm font-semibold hover:scale-105 transition-transform shadow-lg shadow-accent/20"
                 >
                   <Mail className="w-4 h-4 mr-2" />
-                  Let&apos;s Talk
+                  Parlons-en
                 </button>
 
                 {/* Mobile menu */}
@@ -211,13 +240,13 @@ export default function PortfolioLinda() {
 
             {mobileMenuOpen && (
               <div className="md:hidden pt-4 pb-2 animate-fade-in-up">
-                {["hero", "about", "experience", "projects", "skills", "contact"].map((id) => (
+                {[{id:"hero",label:"Accueil"},{id:"about",label:"À propos"},{id:"experience",label:"Expérience"},{id:"projects",label:"Projets"},{id:"portfolio",label:"Portfolio"},{id:"skills",label:"Compétences"},{id:"contact",label:"Contact"}].map((item) => (
                   <button
-                    key={id}
-                    onClick={() => scrollToSection(id)}
-                    className="block w-full text-left py-3 px-4 text-muted-foreground hover:text-accent capitalize transition-colors"
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className="block w-full text-left py-3 px-4 text-muted-foreground hover:text-accent transition-colors"
                   >
-                    {id}
+                    {item.label}
                   </button>
                 ))}
               </div>
@@ -240,7 +269,7 @@ export default function PortfolioLinda() {
               <div className="space-y-6">
                 <div className="inline-flex items-center px-4 py-2 rounded-full border border-accent/20 bg-accent/5 text-accent text-sm font-medium">
                   <Sparkles className="w-4 h-4 mr-2" />
-                  Available for opportunities
+                  Disponible pour des opportunités
                 </div>
 
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
@@ -249,11 +278,11 @@ export default function PortfolioLinda() {
                 </h1>
 
                 <p className="text-xl text-accent/70 font-light tracking-wide italic">
-                  Strategic Marketer · Digital & Innovation
+                  Marketing Stratégique · Digital & Innovation
                 </p>
 
                 <p className="text-lg text-muted-foreground leading-relaxed font-light italic max-w-lg">
-                  &ldquo;Building brands & experiences&rdquo;
+                  &ldquo;Créer des marques & des expériences&rdquo;
                 </p>
               </div>
 
@@ -261,17 +290,17 @@ export default function PortfolioLinda() {
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-accent" />
-                  Tunis, Tunisia
+                  Tunis, Tunisie
                 </span>
                 <span className="flex items-center gap-2">
                   <GraduationCap className="w-4 h-4 text-accent" />
-                  Master Innovation & Digital Strategy
+                  Master Innovation & Stratégie Digitale
                 </span>
               </div>
 
               {/* Skill Pills */}
               <div className="flex flex-wrap gap-2">
-                {["Brand Strategy", "Digital Marketing", "Event Management", "Entrepreneurship", "Community Building", "Go-to-Market"].map((skill, i) => (
+                {["Stratégie de marque", "Marketing Digital", "Gestion d'événements", "Entrepreneuriat", "Community Building", "Go-to-Market"].map((skill, i) => (
                   <span
                     key={skill}
                     className="px-3 py-1.5 rounded-full text-xs font-medium border border-accent/20 bg-accent/5 text-accent/80 hover:scale-105 transition-transform cursor-default animate-fade-in-up"
@@ -288,13 +317,13 @@ export default function PortfolioLinda() {
                   onClick={() => scrollToSection("projects")}
                   className="px-8 py-3 rounded-full accent-gradient text-sm font-semibold hover:scale-105 transition-transform shadow-lg shadow-accent/20"
                 >
-                  View My Work
+                  Voir mes projets
                 </button>
                 <button
                   onClick={() => scrollToSection("about")}
                   className="px-8 py-3 rounded-full border border-accent/20 text-accent text-sm font-medium hover:bg-accent/5 hover:scale-105 transition-all"
                 >
-                  About Me
+                  À propos
                 </button>
               </div>
             </div>
@@ -326,7 +355,7 @@ export default function PortfolioLinda() {
             onClick={() => scrollToSection("about")}
             className="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-20 h-20 rounded-full border border-accent/20 flex flex-col items-center justify-center gap-1 animate-bounce hover:border-accent/40 transition-colors cursor-pointer bg-transparent"
           >
-            <span className="text-[10px] text-accent/50 tracking-[0.2em] uppercase font-medium">Scroll</span>
+            <span className="text-[10px] text-accent/50 tracking-[0.2em] uppercase font-medium">Défiler</span>
             <ChevronDown className="w-4 h-4 text-accent/40" />
           </button>
         </section>
@@ -336,29 +365,38 @@ export default function PortfolioLinda() {
           <div className="section-divider mb-24"></div>
           <div className="max-w-6xl mx-auto">
             <div className="mb-16">
-              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">01 — About Me</span>
+              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">01 — À propos</span>
               <h2 className="text-4xl lg:text-5xl font-serif font-bold mt-4 text-foreground">
-                Crafting Digital <br /><em className="text-shimmer not-italic">Experiences</em>
+                Créer des expériences <br /><em className="text-shimmer not-italic">digitales</em>
               </h2>
             </div>
 
             <div className="grid lg:grid-cols-5 gap-12 items-start">
               <div className="lg:col-span-3 space-y-6">
                 <p className="text-lg text-accent/60 leading-relaxed font-light">
-                  Étudiante en Master Management de l&apos;Innovation à Digital College Tunis, je suis passionnée par la stratégie digitale B2B·B2C et l&apos;entrepreneuriat.
+                  Étudiante en Master Management de l&apos;Innovation, spécialisée en stratégie digitale B2B &amp; B2C, je développe une approche orientée création de valeur à travers le branding, le marketing stratégique et le développement de concepts.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  Mon parcours mêle marketing stratégique, création de marque et gestion d&apos;événements. De la fondation d&apos;Euphoric Tunes — une communauté musicale rassemblant 500+ participants — à la conception de marques lifestyle premium, je transforme les visions en réalités concrètes.
+                  À l&apos;intersection de l&apos;analyse et de la créativité, je conçois et structure des projets en transformant des idées en expériences de marque cohérentes et désirables.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Curieuse des dynamiques de consommation et des tendances digitales, je m&apos;intéresse particulièrement au développement de marques lifestyle, aux stratégies d&apos;acquisition et à la construction d&apos;univers de marque différenciants.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Rigoureuse, proactive et orientée résultats, je cherche à évoluer dans des environnements exigeants où stratégie, exécution et vision se rencontrent.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
                   Ce qui me définit ? Une approche à la fois analytique et créative, un leadership naturel et une obsession pour les détails qui font la différence.
                 </p>
+                <blockquote className="border-l-2 border-accent/30 pl-4 py-2 italic text-accent/70 text-sm">
+                  &laquo; Je ne fais pas du marketing &ldquo;visible&rdquo;, je fais du marketing qui performe. &raquo;
+                </blockquote>
 
                 <div ref={statsRef} className="grid grid-cols-3 gap-6 pt-8">
                   {[
-                    { target: 500, suffix: "+", label: "Event Attendees" },
-                    { target: 4, suffix: "", label: "Major Projects" },
-                    { target: 12, suffix: "+", label: "Team Members Led" },
+                    { target: 500, suffix: "+", label: "Participants" },
+                    { target: 4, suffix: "", label: "Projets majeurs" },
+                    { target: 12, suffix: "+", label: "Membres dirigés" },
                   ].map((stat, i) => (
                     <div key={i} className="text-center">
                       <div className="text-3xl lg:text-4xl font-bold text-accent font-serif">
@@ -376,7 +414,7 @@ export default function PortfolioLinda() {
                     <Image src="/images/linda-friends.jpg" alt="Linda at a professional event" fill className="object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                     <div className="absolute bottom-4 left-4 right-4">
-                      <span className="text-xs text-white/80 uppercase tracking-widest">Professional Event</span>
+                      <span className="text-xs text-white/80 uppercase tracking-widest">Événement professionnel</span>
                     </div>
                   </div>
                   <div className="absolute -inset-1 rounded-2xl border border-accent/10 -z-10"></div>
@@ -391,9 +429,9 @@ export default function PortfolioLinda() {
           <div className="section-divider mb-24"></div>
           <div className="max-w-6xl mx-auto">
             <div className="mb-16">
-              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">02 — Experience</span>
+              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">02 — Expérience</span>
               <h2 className="text-4xl lg:text-5xl font-serif font-bold mt-4 text-foreground">
-                Professional <br /><em className="text-shimmer not-italic">Journey</em>
+                Parcours <br /><em className="text-shimmer not-italic">Professionnel</em>
               </h2>
             </div>
 
@@ -405,7 +443,7 @@ export default function PortfolioLinda() {
                   <div>
                     <div className="flex items-center gap-3 mb-2">
                       <Music className="w-5 h-5 text-accent" />
-                      <h3 className="text-xl font-semibold text-foreground">Fondatrice & Event Organizer</h3>
+                      <h3 className="text-xl font-semibold text-foreground">Fondatrice & Organisatrice d&apos;événements</h3>
                     </div>
                     <p className="text-accent/70 font-medium">Euphoric Tunes</p>
                   </div>
@@ -428,7 +466,7 @@ export default function PortfolioLinda() {
                   ))}
                 </ul>
                 <div className="flex flex-wrap gap-2">
-                  {["Event Management", "Community Building", "Brand Identity", "Partnerships"].map(tag => (
+                  {["Gestion d'événements", "Community Building", "Identité de marque", "Partenariats"].map(tag => (
                     <span key={tag} className="text-xs px-3 py-1 rounded-full border border-accent/20 bg-accent/5 text-accent/70">{tag}</span>
                   ))}
                 </div>
@@ -464,7 +502,7 @@ export default function PortfolioLinda() {
                   ))}
                 </ul>
                 <div className="flex flex-wrap gap-2">
-                  {["Project Management", "Team Leadership", "Budget Management", "Sponsorship"].map(tag => (
+                  {["Gestion de projet", "Leadership d'équipe", "Gestion budgétaire", "Sponsoring"].map(tag => (
                     <span key={tag} className="text-xs px-3 py-1 rounded-full border border-accent/20 bg-accent/5 text-accent/70">{tag}</span>
                   ))}
                 </div>
@@ -478,9 +516,9 @@ export default function PortfolioLinda() {
           <div className="section-divider mb-24"></div>
           <div className="max-w-6xl mx-auto">
             <div className="mb-16">
-              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">03 — Projects</span>
+              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">03 — Projets</span>
               <h2 className="text-4xl lg:text-5xl font-serif font-bold mt-4 text-foreground">
-                Entrepreneurial <br /><em className="text-shimmer not-italic">Ventures</em>
+                Projets <br /><em className="text-shimmer not-italic">Entrepreneuriaux</em>
               </h2>
             </div>
 
@@ -494,14 +532,14 @@ export default function PortfolioLinda() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-foreground">Euphoric Tunes</h3>
-                    <p className="text-sm text-accent/50">Music Community & Events</p>
+                    <p className="text-sm text-accent/50">Communauté musicale & Événements</p>
                   </div>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                   Création d&apos;une communauté musicale indépendante dédiée à la promotion de la scène tunisienne. Organisation d&apos;événements rassemblant 500+ participants avec gestion complète de la communication, logistique et partenariats.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {["500+ Attendees", "Brand Identity", "Partnerships", "Social Media"].map(h => (
+                  {["500+ Participants", "Identité de marque", "Partenariats", "Réseaux sociaux"].map(h => (
                     <span key={h} className="text-xs px-3 py-1 rounded-full bg-accent/5 border border-accent/15 text-accent/60">{h}</span>
                   ))}
                 </div>
@@ -554,14 +592,211 @@ export default function PortfolioLinda() {
           </div>
         </section>
 
+        {/* ═══════════════ PORTFOLIO / CREATIVE WORKS ═══════════════ */}
+        <section id="portfolio" className="py-24 px-4 relative">
+          <div className="section-divider mb-24"></div>
+          <div className="max-w-6xl mx-auto">
+            <div className="mb-16">
+              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">04 — Portfolio</span>
+              <h2 className="text-4xl lg:text-5xl font-serif font-bold mt-4 text-foreground">
+                Réalisations <br /><em className="text-shimmer not-italic">Créatives</em>
+              </h2>
+              <p className="text-muted-foreground mt-4 max-w-xl">Quelques exemples de réalisations en direction artistique, design graphique et campagnes créatives.</p>
+            </div>
+
+            {/* Graphic Design Works */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+
+              {/* Sephora */}
+              <div className="glass-card rounded-2xl overflow-hidden group">
+                <div className="relative w-full aspect-[3/4] overflow-hidden">
+                  <Image
+                    src="/images/sephora-lipstick.jpg"
+                    alt="Sephora — Affiche Campagne National Lipstick Day"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                <div className="p-6 space-y-3">
+                  <h3 className="text-lg font-semibold text-foreground">Sephora — Affiche Campagne National Lipstick Day</h3>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="text-xs px-3 py-1 rounded-full bg-accent/5 border border-accent/15 text-accent/60">Design Graphique</span>
+                    <span className="text-xs px-3 py-1 rounded-full bg-accent/5 border border-accent/15 text-accent/60">Direction Artistique</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground/70 flex items-center gap-1.5">
+                    <Palette className="w-3.5 h-3.5" /> Adobe Photoshop
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Conception d&apos;une affiche promotionnelle pour Sephora à l&apos;occasion du National Lipstick Day : direction artistique, sélection visuelle et mise en page typographique sur Photoshop.
+                  </p>
+                </div>
+              </div>
+
+              {/* Porsche */}
+              <div className="glass-card rounded-2xl overflow-hidden group">
+                <div className="relative w-full aspect-[3/4] overflow-hidden">
+                  <Image
+                    src="/images/porsche-gt3rs.jpg"
+                    alt="Porsche 911 GT3RS — Affiche Publicitaire"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                <div className="p-6 space-y-3">
+                  <h3 className="text-lg font-semibold text-foreground">Porsche 911 GT3RS — Affiche Publicitaire</h3>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="text-xs px-3 py-1 rounded-full bg-accent/5 border border-accent/15 text-accent/60">Design Graphique</span>
+                    <span className="text-xs px-3 py-1 rounded-full bg-accent/5 border border-accent/15 text-accent/60">Direction Artistique</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground/70 flex items-center gap-1.5">
+                    <Palette className="w-3.5 h-3.5" /> Adobe Photoshop
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Conception d&apos;une affiche publicitaire pour la Porsche 911 GT3RS : direction artistique, mise en scène produit et typographie travaillée sur Photoshop.
+                  </p>
+                </div>
+              </div>
+
+              {/* Moodboard */}
+              <div className="glass-card rounded-2xl overflow-hidden group">
+                <div className="relative w-full aspect-[3/4] overflow-hidden">
+                  <Image
+                    src="/images/moodboard-skincare.jpg"
+                    alt="Moodboard — Skincare & Beauty"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                <div className="p-6 space-y-3">
+                  <h3 className="text-lg font-semibold text-foreground">Moodboard — Skincare & Beauty</h3>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="text-xs px-3 py-1 rounded-full bg-accent/5 border border-accent/15 text-accent/60">Branding</span>
+                    <span className="text-xs px-3 py-1 rounded-full bg-accent/5 border border-accent/15 text-accent/60">Direction Artistique</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground/70 flex items-center gap-1.5">
+                    <Palette className="w-3.5 h-3.5" /> Canva / Photoshop
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Création d&apos;un moodboard pour un univers skincare & beauté : palette chromatique, direction visuelle et inspiration lifestyle.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Video Section */}
+            <div className="mb-16">
+              <h3 className="text-2xl font-serif font-semibold text-foreground mb-6 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
+                  <Play className="w-4 h-4 text-accent" />
+                </div>
+                Vidéo — Campagne Produit via IA
+              </h3>
+              <div className="glass-card rounded-2xl overflow-hidden">
+                <div className="relative w-full aspect-video bg-black rounded-t-2xl overflow-hidden">
+                  <video
+                    className="w-full h-full object-cover"
+                    controls
+                    poster="/images/geox-poster.jpg"
+                  >
+                    <source src="/videos/Description_dtaille_du_202601091431_3dk3z.mp4" type="video/mp4" />
+                    Votre navigateur ne supporte pas la lecture vidéo.
+                  </video>
+                </div>
+                <div className="p-6">
+                  <h4 className="text-lg font-semibold text-foreground mb-2">Geox Respira — Campagne Vidéo Produit via IA Générative</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Conception et réalisation d&apos;une campagne vidéo produit via IA générative : Geox Respira.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    <span className="text-xs px-3 py-1 rounded-full bg-accent/5 border border-accent/15 text-accent/60">IA Générative</span>
+                    <span className="text-xs px-3 py-1 rounded-full bg-accent/5 border border-accent/15 text-accent/60">Production Vidéo</span>
+                    <span className="text-xs px-3 py-1 rounded-full bg-accent/5 border border-accent/15 text-accent/60">Campagne Produit</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Euphoric Tunes Event Gallery */}
+            <div className="mb-16">
+              <h3 className="text-2xl font-serif font-semibold text-foreground mb-6 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
+                  <Camera className="w-4 h-4 text-accent" />
+                </div>
+                Événements Euphoric Tunes
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Preparation */}
+                <div className="glass-card rounded-2xl overflow-hidden group">
+                  <div className="relative w-full aspect-[4/5] overflow-hidden">
+                    <Image
+                      src="/images/euphoric-preparation.jpg"
+                      alt="Euphoric Tunes — Préparation de l'événement"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-accent/60">Préparation</span>
+                  </div>
+                </div>
+
+                {/* Event */}
+                <div className="glass-card rounded-2xl overflow-hidden group">
+                  <div className="relative w-full aspect-[4/5] overflow-hidden">
+                    <Image
+                      src="/images/euphoric-event.jpg"
+                      alt="Euphoric Tunes — Événement"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-accent/60">Événement</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ═══════════════ CERTIFICATIONS SECTION ═══════════════ */}
+        <section id="certifications" className="py-24 px-4 relative">
+          <div className="section-divider mb-24"></div>
+          <div className="max-w-6xl mx-auto">
+            <div className="mb-16">
+              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">05 — Certifications</span>
+              <h2 className="text-4xl lg:text-5xl font-serif font-bold mt-4 text-foreground">
+                Certifications <br /><em className="text-shimmer not-italic">& Formations</em>
+              </h2>
+            </div>
+
+            <div className="glass-card rounded-2xl overflow-hidden group max-w-2xl">
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
+                <Image
+                  src="/images/hubspot-certification.jpg"
+                  alt="HubSpot Academy — Certifié au Marketing de Contenu"
+                  fill
+                  className="object-contain bg-white p-4 group-hover:scale-[1.02] transition-transform duration-700"
+                />
+              </div>
+              <div className="p-6 space-y-2">
+                <h4 className="text-lg font-semibold text-foreground">Certifié au Marketing de Contenu</h4>
+                <p className="text-sm text-accent/60 font-medium">HubSpot Academy</p>
+                <p className="text-xs text-muted-foreground">Période de validité : juin 3 2025 – juil. 3 2027</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ═══════════════ EDUCATION SECTION ═══════════════ */}
         <section id="education" className="py-24 px-4 relative">
           <div className="section-divider mb-24"></div>
           <div className="max-w-6xl mx-auto">
             <div className="mb-16">
-              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">04 — Education</span>
+              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">06 — Formation</span>
               <h2 className="text-4xl lg:text-5xl font-serif font-bold mt-4 text-foreground">
-                Academic <br /><em className="text-shimmer not-italic">Foundation</em>
+                Parcours <br /><em className="text-shimmer not-italic">Académique</em>
               </h2>
             </div>
 
@@ -594,7 +829,7 @@ export default function PortfolioLinda() {
                     <Image src="/images/linda-diploma.jpg" alt="Linda receiving her diploma with the jury" fill className="object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                     <div className="absolute bottom-4 left-4 right-4">
-                      <span className="text-xs text-white/80 uppercase tracking-widest">Diploma Ceremony</span>
+                      <span className="text-xs text-white/80 uppercase tracking-widest">Cérémonie de diplôme</span>
                     </div>
                   </div>
                   <div className="absolute -inset-1 rounded-2xl border border-accent/10 -z-10"></div>
@@ -609,9 +844,9 @@ export default function PortfolioLinda() {
           <div className="section-divider mb-24"></div>
           <div className="max-w-6xl mx-auto">
             <div className="mb-16">
-              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">05 — Skills</span>
+              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">07 — Compétences</span>
               <h2 className="text-4xl lg:text-5xl font-serif font-bold mt-4 text-foreground">
-                Expertise & <br /><em className="text-shimmer not-italic">Capabilities</em>
+                Expertise & <br /><em className="text-shimmer not-italic">Savoir-faire</em>
               </h2>
             </div>
 
@@ -620,7 +855,7 @@ export default function PortfolioLinda() {
               <div className="glass-card rounded-2xl p-8">
                 <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
                   <Briefcase className="w-5 h-5 text-accent" />
-                  Technical Skills
+                  Compétences Techniques
                 </h3>
                 <div className="flex flex-wrap gap-3">
                   {[
@@ -641,14 +876,14 @@ export default function PortfolioLinda() {
               <div className="glass-card rounded-2xl p-8">
                 <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
                   <Star className="w-5 h-5 text-accent" />
-                  Soft Skills
+                  Savoir-être
                 </h3>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {[
-                    { title: "Strategy", desc: "Vision stratégique · Esprit analytique · Prise de décision" },
-                    { title: "Marketing & Branding", desc: "Créativité orientée branding · Storytelling · Social media" },
+                    { title: "Stratégie", desc: "Vision stratégique · Esprit analytique · Prise de décision" },
+                    { title: "Marketing & Branding", desc: "Créativité orientée branding · Storytelling · Réseaux sociaux" },
                     { title: "Leadership", desc: "Leadership naturel · Intelligence émotionnelle · Communication" },
-                    { title: "Organization", desc: "Gestion des priorités · Sens du détail · Autonomie" }
+                    { title: "Organisation", desc: "Gestion des priorités · Sens du détail · Autonomie" }
                   ].map((item) => (
                     <div key={item.title} className="p-4 rounded-xl bg-accent/5 border border-accent/10">
                       <h4 className="text-sm font-semibold text-accent mb-2">{item.title}</h4>
@@ -662,14 +897,14 @@ export default function PortfolioLinda() {
               <div className="glass-card rounded-2xl p-8">
                 <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
                   <Globe className="w-5 h-5 text-accent" />
-                  Languages
+                  Langues
                 </h3>
                 <div className="space-y-5">
                   {[
-                    { name: "Français", level: "Native / C2", width: "100%" },
-                    { name: "English", level: "Fluent / B2-C1", width: "85%" },
-                    { name: "العربية", level: "Fluent / B2", width: "80%" },
-                    { name: "Español", level: "Basic / A2", width: "35%" }
+                    { name: "Français", level: "Langue maternelle / C2", width: "100%" },
+                    { name: "English", level: "Courant / B2-C1", width: "85%" },
+                    { name: "العربية", level: "Courant / B2", width: "80%" },
+                    { name: "Español", level: "Notions / A2", width: "35%" }
                   ].map((lang) => (
                     <div key={lang.name}>
                       <div className="flex justify-between items-center mb-2">
@@ -695,34 +930,33 @@ export default function PortfolioLinda() {
           <div className="section-divider mb-16"></div>
           <div className="max-w-6xl mx-auto">
             <div className="mb-10">
-              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">06 — Passions</span>
+              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">08 — Passions</span>
               <h2 className="text-4xl lg:text-5xl font-serif font-bold mt-4 text-foreground">
-                Beyond <em className="text-shimmer not-italic">Work</em>
+                Au-delà du <em className="text-shimmer not-italic">travail</em>
               </h2>
             </div>
             <div className="marquee-container py-6">
               <div className="flex gap-4 animate-marquee w-max">
                 {[
-                  { icon: "🚀", label: "Entrepreneurship" },
-                  { icon: "🍽️", label: "Gastronomy" },
-                  { icon: "💄", label: "Beauty & Trends" },
-                  { icon: "📱", label: "Digital Strategy" },
-                  { icon: "👗", label: "Fashion & Lifestyle" },
-                  { icon: "🧠", label: "Personal Development" },
-                  { icon: "📚", label: "Harvard Business Review" },
-                  { icon: "✨", label: "Zero to One — Peter Thiel" },
-                  { icon: "🚀", label: "Entrepreneurship" },
-                  { icon: "🍽️", label: "Gastronomy" },
-                  { icon: "💄", label: "Beauty & Trends" },
-                  { icon: "📱", label: "Digital Strategy" },
-                  { icon: "👗", label: "Fashion & Lifestyle" },
-                  { icon: "🧠", label: "Personal Development" },
-                  { icon: "📚", label: "Harvard Business Review" },
-                  { icon: "✨", label: "Zero to One — Peter Thiel" },
+                  "Entrepreneuriat",
+                  "Gastronomie",
+                  "Beauté & Tendances",
+                  "Stratégie Digitale",
+                  "Mode & Lifestyle",
+                  "Développement Personnel",
+                  "Harvard Business Review",
+                  "Zero to One — Peter Thiel",
+                  "Entrepreneuriat",
+                  "Gastronomie",
+                  "Beauté & Tendances",
+                  "Stratégie Digitale",
+                  "Mode & Lifestyle",
+                  "Développement Personnel",
+                  "Harvard Business Review",
+                  "Zero to One — Peter Thiel",
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 px-6 py-3 rounded-full border border-accent/15 bg-accent/5 text-foreground/60 text-sm whitespace-nowrap shrink-0">
-                    <span className="text-lg">{item.icon}</span>
-                    {item.label}
+                  <div key={i} className="flex items-center px-6 py-3 rounded-full border border-accent/15 bg-accent/5 text-foreground/60 text-sm whitespace-nowrap shrink-0">
+                    {item}
                   </div>
                 ))}
               </div>
@@ -738,12 +972,12 @@ export default function PortfolioLinda() {
               <div className="absolute -top-20 -right-20 w-60 h-60 bg-accent/5 rounded-full blur-3xl"></div>
               <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-accent/5 rounded-full blur-3xl"></div>
 
-              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">07 — Contact</span>
+              <span className="text-accent/50 text-sm tracking-[0.3em] uppercase font-medium">09 — Contact</span>
               <h2 className="text-4xl lg:text-5xl font-serif font-bold mt-4 mb-6 text-foreground">
-                Let&apos;s Create<br />Something <em className="text-shimmer not-italic">Beautiful</em>
+                Créons quelque chose<br /><em className="text-shimmer not-italic">de beau</em>
               </h2>
               <p className="text-muted-foreground max-w-lg mx-auto mb-10 leading-relaxed">
-                Whether it&apos;s a brand strategy, a digital campaign, or an exciting collaboration — I&apos;d love to hear from you.
+                Stratégie de marque, développement digital ou projets de croissance : je suis toujours ouverte à échanger autour d&apos;initiatives ambitieuses et orientées impact.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
@@ -784,7 +1018,7 @@ export default function PortfolioLinda() {
               >
                 <span className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  Get in Touch
+                  Me contacter
                 </span>
               </button>
             </div>
@@ -797,10 +1031,10 @@ export default function PortfolioLinda() {
             <div className="flex items-center gap-3">
               <span className="text-xl font-serif font-bold text-shimmer">LM</span>
               <span className="w-1 h-1 rounded-full bg-accent"></span>
-              <span className="text-sm text-muted-foreground/50">© 2025 Linda Mabrouk. All rights reserved.</span>
+              <span className="text-sm text-muted-foreground/50">© 2025 Linda Mabrouk. Tous droits réservés.</span>
             </div>
             <button onClick={() => scrollToSection("hero")} className="text-sm text-accent/40 hover:text-accent transition-colors">
-              Back to top ↑
+              Retour en haut ↑
             </button>
           </div>
         </footer>
